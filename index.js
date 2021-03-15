@@ -4,12 +4,21 @@ function example1() {
     console.log(`${datetime} [${severity}] - ${message}`);
   }
 
-  log("piet", "INFO", "Example 1.1: This is an informational message");
-  log(Date.now(), "ERROR", "Example 1.2: An exception occurred");
+  log(
+    new Date().toISOString(),
+    "INFO",
+    "Example 1.1: This is an informational message"
+  );
+
+  log(new Date().toISOString(), "ERROR", "Example 1.2: An exception occurred");
+
+  setTimeout(function () {
+    log(new Date().toISOString(), "INFO", "Example 1.3: 1 second later...");
+  }, 1000);
 }
 
 // Uncomment to run Example 1:
-example1();
+// example1();
 
 // Example 2: Introducing an abstraction
 function example2() {
@@ -17,12 +26,16 @@ function example2() {
     console.log(`${datetime} [${severity}] - ${message}`);
   }
 
-  const logInformation = (message) => log(new Date(), "INFO", message);
-  const logError = (message) => log(new Date(), "ERROR", message);
+  const logInformation = (message) =>
+    log(new Date().toISOString(), "INFO", message);
+  const logError = (message) => log(new Date().toISOString(), "ERROR", message);
 
   logInformation("Example 2.1: This is an informational message");
+  logError("Example 2.2: An exception occurred!");
 
-  logError("Example 2.2: An exception occurred");
+  setTimeout(function () {
+    logInformation("Example 2.3: 1 second later...");
+  }, 1000);
 }
 
 // Uncomment to run Example 2:
@@ -42,16 +55,19 @@ function example3() {
   // const log = (datetime) => (severity) => (message) =>
   //   console.log(`${datetime} [${severity}] - ${message}`);
 
-  const logInformation = log(new Date())("INFO");
-  const logError = log(new Date())("ERROR");
+  const logInformation = log(new Date().toISOString())("INFO");
+  const logError = log(new Date().toISOString())("ERROR");
 
   logInformation("Example 3.1: This is an informational message!");
-
   logError("Example 3.2: An exception occurred!");
+
+  setTimeout(function () {
+    logInformation("Example 3.3: 1 second later...");
+  }, 1000);
 }
 
 // Uncomment to run Example 3:
-// example3();
+//example3();
 
 function example4() {
   function curry(fn) {
@@ -71,22 +87,26 @@ function example4() {
 
   // We can call log with all 3 arguments:
   curriedLog(
-    new Date(),
+    new Date().toISOString(),
     "INFO",
     "Example 4.1: This is an informational message"
   );
 
   // We can pass all arguments separately:
-  curriedLog(new Date())("INFO")(
+  curriedLog(new Date().toISOString())("INFO")(
     "Example 4.2: This is an informational message"
   );
 
   // And we can apply partial application:
-  const logInfo = curriedLog(new Date())("INFO");
-  logInfo("Example 4.3: This is an informational message");
+  const logInformation = curriedLog(new Date().toISOString())("INFO");
+  logInformation("Example 4.3: This is an informational message");
+
+  setTimeout(function () {
+    logInformation("Example 4.4: 1 second later...");
+  }, 2000);
 
   // etc. etc.
 }
 
 // Uncomment to run Example 4:
-// example4();
+example4();
