@@ -4,13 +4,12 @@ function example1() {
     console.log(`${datetime} [${severity}] - ${message}`);
   }
 
-  const datetime = new Date();
-  log(datetime, "INFO", "This is an informational message");
-  log(datetime, "ERROR", "An exception occurred");
+  log("piet", "INFO", "Example 1.1: This is an informational message");
+  log(Date.now(), "ERROR", "Example 1.2: An exception occurred");
 }
 
 // Uncomment to run Example 1:
-// example1()
+example1();
 
 // Example 2: Introducing an abstraction
 function example2() {
@@ -18,13 +17,12 @@ function example2() {
     console.log(`${datetime} [${severity}] - ${message}`);
   }
 
-  const utcDate = new Date();
-  const logInformation = (message) => log(utcDate, "INFO", message);
-  const logError = (message) => log(utcDate, "ERROR", message);
+  const logInformation = (message) => log(new Date(), "INFO", message);
+  const logError = (message) => log(new Date(), "ERROR", message);
 
-  logInformation("This is an informational message");
+  logInformation("Example 2.1: This is an informational message");
 
-  logError("An exception occurred");
+  logError("Example 2.2: An exception occurred");
 }
 
 // Uncomment to run Example 2:
@@ -44,13 +42,12 @@ function example3() {
   // const log = (datetime) => (severity) => (message) =>
   //   console.log(`${datetime} [${severity}] - ${message}`);
 
-  const utcDate = new Date();
-  const logInformation = log(utcDate)("INFO");
-  const logError = log(utcDate)("ERROR");
+  const logInformation = log(new Date())("INFO");
+  const logError = log(new Date())("ERROR");
 
-  logInformation("This is an informational message!");
+  logInformation("Example 3.1: This is an informational message!");
 
-  logError("An exception occurred!");
+  logError("Example 3.2: An exception occurred!");
 }
 
 // Uncomment to run Example 3:
@@ -73,14 +70,20 @@ function example4() {
   let curriedLog = curry(log);
 
   // We can call log with all 3 arguments:
-  curriedLog(new Date(), "INFO", "This is an informational message");
+  curriedLog(
+    new Date(),
+    "INFO",
+    "Example 4.1: This is an informational message"
+  );
 
   // We can pass all arguments separately:
-  curriedLog(new Date())("INFO")("This is an informational message");
+  curriedLog(new Date())("INFO")(
+    "Example 4.2: This is an informational message"
+  );
 
   // And we can apply partial application:
   const logInfo = curriedLog(new Date())("INFO");
-  logInfo("This is an informational message");
+  logInfo("Example 4.3: This is an informational message");
 
   // etc. etc.
 }
