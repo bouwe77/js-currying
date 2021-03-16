@@ -19,7 +19,7 @@ function example1() {
 }
 
 // Uncomment to run Example 1:
-// example1();
+example1();
 
 // Example 2: Introducing an abstraction
 function example2() {
@@ -57,12 +57,13 @@ function example3() {
   // const log = (datetime) => (severity) => (message) =>
   //   console.log(`${datetime} [${severity}] - ${message}`);
 
-  var timestamp = {
+  // This is an object that lazily loads the current datetime:
+  var datetime = {
     toString: () => new Date().toISOString()
   };
 
-  const logInformation = log(timestamp)("INFO");
-  const logError = log(timestamp)("ERROR");
+  const logInformation = log(datetime)("INFO");
+  const logError = log(datetime)("ERROR");
 
   logInformation("Example 3.1: This is an informational message!");
   logError("Example 3.2: An exception occurred!");
@@ -74,7 +75,7 @@ function example3() {
 }
 
 // Uncomment to run Example 3:
-//example3();
+// example3();
 
 function example4() {
   function curry(fn) {
@@ -90,26 +91,21 @@ function example4() {
     console.log(`${datetime} [${severity}] - ${message}`);
   }
 
-  var timestamp = {
+  // This is an object that lazily loads the current datetime:
+  var datetime = {
     toString: () => new Date().toISOString()
   };
 
   let curriedLog = curry(log);
 
   // We can call log with all 3 arguments:
-  curriedLog(
-    timestamp,
-    "INFO",
-    "Example 4.1: This is an informational message"
-  );
+  curriedLog(datetime, "INFO", "Example 4.1: This is an informational message");
 
   // We can pass all arguments separately:
-  curriedLog(timestamp)("INFO")(
-    "Example 4.2: This is an informational message"
-  );
+  curriedLog(datetime)("INFO")("Example 4.2: This is an informational message");
 
   // And we can apply partial application:
-  const logInformation = curriedLog(timestamp)("INFO");
+  const logInformation = curriedLog(datetime)("INFO");
   logInformation("Example 4.3: This is an informational message");
 
   // Log 1 second later to check the timestamp is different:
@@ -121,4 +117,4 @@ function example4() {
 }
 
 // Uncomment to run Example 4:
-example4();
+// example4();
