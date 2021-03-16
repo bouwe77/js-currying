@@ -77,6 +77,7 @@ function example3() {
 // Uncomment to run Example 3:
 // example3();
 
+// Example 4: Hybrid currying
 function example4() {
   function curry(fn) {
     return function curried(...args) {
