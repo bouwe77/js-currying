@@ -80,6 +80,7 @@ function example4() {
   }
 
   function log(datetime, severity, message) {
+    if (!datetime) datetime = new Date().toISOString();
     console.log(`${datetime} [${severity}] - ${message}`);
   }
 
@@ -98,7 +99,7 @@ function example4() {
   );
 
   // And we can apply partial application:
-  const logInformation = curriedLog(new Date().toISOString())("INFO");
+  const logInformation = curriedLog(null)("INFO");
   logInformation("Example 4.3: This is an informational message");
 
   setTimeout(function () {
