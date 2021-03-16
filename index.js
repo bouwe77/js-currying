@@ -99,7 +99,7 @@ function example4() {
   );
 
   // And we can apply partial application:
-  const logInformation = curriedLog(null)("INFO");
+  const logInformation = curriedLog(undefined)("INFO");
   logInformation("Example 4.3: This is an informational message");
 
   setTimeout(function () {
